@@ -10,13 +10,16 @@ import pl.touljaboy.springcoredemo.common.model.Animal;
 public class DemoController {
 
     private Animal customAnimal;
-    private Animal humanoidAnimal;
+    private Animal anotherAnimal;
 
    @Autowired
-    public DemoController(Animal theAnimal, @Qualifier("human") Animal theHumanoid) {
+    public DemoController(
+            @Qualifier("human") Animal theAnimal,
+            @Qualifier("human") Animal theanotherAnimal) {
        System.out.println("In construction: " + getClass().getSimpleName());
         customAnimal = theAnimal;
-        humanoidAnimal = theHumanoid;
+        anotherAnimal = theanotherAnimal;
+        //Singleton, so it will refer to the same bean
     }
     /*
     @Autowired
@@ -26,6 +29,13 @@ public class DemoController {
     */
     @GetMapping("/animalSound")
     public String getAnimalSound() {
-        return "Rat sound: "+customAnimal.makeSound()+" lol 123\n"+"Human sound: "+humanoidAnimal.makeSound();
+        return "Rat sound: "+customAnimal.makeSound()+" lol 123\n"+"Human sound: "+anotherAnimal.makeSound();
+    }
+
+    @GetMapping("/check")
+    public String check(){
+        //Singleton will return true (the same bean)
+        //Prototype will return false (different beans)
+        return "Are both animals equal? : " + (customAnimal==anotherAnimal);
     }
 }
