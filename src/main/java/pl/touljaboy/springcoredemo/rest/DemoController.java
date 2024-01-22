@@ -12,8 +12,7 @@ public class DemoController {
     private Animal customAnimal;
 
     @Autowired
-    public DemoController(
-            @Qualifier("human") Animal theAnimal) {
+    public DemoController(@Qualifier("weirdLookingRat") Animal theAnimal) {
         System.out.println("In construction: " + getClass().getSimpleName());
         customAnimal = theAnimal;
         //Singleton, so it will refer to the same bean
@@ -27,7 +26,7 @@ public class DemoController {
     */
     @GetMapping("/animalSound")
     public String getAnimalSound() {
-        return "Rat sound: " + customAnimal.makeSound() + " lol 123";
+        return customAnimal.getClass().getSimpleName()+" sound: " + customAnimal.makeSound() + " lol 123";
 
     }
 }

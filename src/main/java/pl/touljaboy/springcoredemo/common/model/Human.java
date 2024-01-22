@@ -13,16 +13,6 @@ public class Human implements Animal{
     public Human() {
         System.out.println("In construction: " + getClass().getSimpleName());
     }
-    //init method
-    @PostConstruct
-    public void startUp() {
-        System.out.println("In startup: " +getClass().getSimpleName());
-    }
-    //destroy method
-    @PreDestroy
-    public void cleanUp() {
-        System.out.println("In cleanup: " +getClass().getSimpleName());
-    }
     @Override
     public String makeSound() {
         return "I know that I know nothing (about programming)";
