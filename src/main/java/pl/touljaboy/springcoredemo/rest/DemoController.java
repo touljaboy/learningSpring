@@ -10,14 +10,15 @@ import pl.touljaboy.springcoredemo.common.model.Animal;
 public class DemoController {
 
     private Animal customAnimal;
-    private Animal humanoidAnimal;
 
-   @Autowired
-    public DemoController(Animal theAnimal, @Qualifier("human") Animal theHumanoid) {
-       System.out.println("In construction: " + getClass().getSimpleName());
+    @Autowired
+    public DemoController(
+            @Qualifier("human") Animal theAnimal) {
+        System.out.println("In construction: " + getClass().getSimpleName());
         customAnimal = theAnimal;
-        humanoidAnimal = theHumanoid;
+        //Singleton, so it will refer to the same bean
     }
+
     /*
     @Autowired
     public void setAnimal(Animal theAnimal) {
@@ -26,6 +27,7 @@ public class DemoController {
     */
     @GetMapping("/animalSound")
     public String getAnimalSound() {
-        return "Rat sound: "+customAnimal.makeSound()+" lol 123\n"+"Human sound: "+humanoidAnimal.makeSound();
+        return "Rat sound: " + customAnimal.makeSound() + " lol 123";
+
     }
 }
