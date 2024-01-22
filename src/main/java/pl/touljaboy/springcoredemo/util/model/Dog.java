@@ -1,7 +1,6 @@
-package pl.touljaboy.springcoredemo.model;
+package pl.touljaboy.springcoredemo.util.model;
 
 import org.springframework.stereotype.Component;
-import pl.touljaboy.springcoredemo.model.Animal;
 
 @Component
 public class Dog implements Animal {
